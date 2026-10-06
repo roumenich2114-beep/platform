@@ -42,10 +42,14 @@
                             <div class="progress" id="audio-progress"></div>
                         </div>
                     </div>
-                    <!-- Скрытый тег аудио для работы логики -->
                     <audio id="main-audio" src="https://soundhelix.com"></audio>
                 </div>
             </div>
+
+            <!-- ========================================== -->
+            <!-- МЕСТО ДЛЯ НОВЫХ СТАТЕЙ ИЗ ВКЛАДКИ "НОBОЕ"   -->
+            <!-- ========================================== -->
+
         </div>
 
         <!-- ВКЛАДКА 2: ПРОЕКТЫ -->
@@ -58,7 +62,7 @@
             <div class="post-card">
                 <div class="meta-info">Медиа</div>
                 <h2>Paideuma TV</h2>
-                <p>Концептуальное проектирование, редакция и вывод в сетевоепространство крупной экспертной медиа-платформы Paideuma TV.</p>
+                <p>Концептуальное проектирование, редакция и вывод в сетевое пространство крупной экспертной медиа-платформы Paideuma TV.</p>
             </div>
         </div>
 
@@ -108,16 +112,47 @@
         </div>
     </main>
 
-    <!-- Всплывающее уведомление для копирования ссылок -->
-    <div class="toast-alert" id="toast">Ссылка скопирована в буфер!</div>
+    <!-- Всплывающий тост -->
+    <div class="toast-alert" id="toast">Ссылка скопирована в буфер обмена!</div>
 
     <footer>
         © 2026 Залог Будущего. Все права защищены.
     </footer>
 
+    <!-- ========================================== -->
+    <!-- СКРЫТЫЕ ШАБЛОНЫ ДЛЯ АЛЕКСАНДРА (ИНСТРУКЦИЯ)-->
+    <!-- ========================================== -->
+    
+    <!-- НАЧАЛО ШАБЛОНА СТАТЬИ -->
+    <!--
+    <div class="post-card">
+        <div class="meta-info">НОВЫЙ МАТЕРИАЛ</div>
+        <h2>ЗАГОЛОВОК СТАТЬИ</h2>
+        <p>ОСНОВНОЙ ТЕКСТ СТАТЬИ</p>
+    </div>
+    -->
+    <!-- КОНЕЦ ШАБЛОНА -->
+
+    <!-- НАЧАЛО ШАБЛОНА ПОДКАСТА (С ПЛЕЕРОМ) -->
+    <!--
+    <div class="post-card">
+        <div class="meta-info">НОВЫЙ ПОДКАСТ</div>
+        <h2>НАЗВАНИЕ НОВОЙ АУДИОЛЕКЦИИ</h2>
+        <p>КРАТКОЕ ОПИСАНИЕ К АУДИОМАТЕРИАЛУ</p>
+        <div class="player-container">
+            <button class="play-btn" onclick="this.innerText === '▶' ? (this.innerText = '⏸', this.nextElementSibling.firstElementChild.nextElementSibling.play()) : (this.innerText = '▶', this.nextElementSibling.firstElementChild.nextElementSibling.pause())">▶</button>
+            <div class="player-info">
+                <div class="track-title">Слушать подкаст</div>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <audio src="ССЫЛКА_НА_АУДИО"></audio>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- КОНЕЦ ШАБЛОНА -->
+
     <!-- Скрипты интерактивности -->
     <script>
-        // Переключение вкладок
         function openTab(evt, tabName) {
             var contents = document.getElementsByClassName("tab-content");
             for (var i = 0; i < contents.length; i++) {
@@ -131,7 +166,6 @@
             evt.currentTarget.className += " active-tab";
         }
 
-        // Логика кастомного аудиоплеера
         var audio = document.getElementById("main-audio");
         var playBtn = document.getElementById("master-play-btn");
         var progressBar = document.getElementById("audio-progress");
@@ -140,7 +174,7 @@
             if (audio.paused) {
                 audio.play();
                 playBtn.innerText = "⏸";
-                playBtn.style.background = "#e11d48"; // Меняем цвет кнопки на красный при игре
+                playBtn.style.background = "#e11d48";
             } else {
                 audio.pause();
                 playBtn.innerText = "▶";
@@ -148,13 +182,11 @@
             }
         }
 
-        // Обновление полосы прогресса во время проигрывания
         audio.ontimeupdate = function() {
             var percentage = (audio.currentTime / audio.duration) * 100;
             progressBar.style.width = percentage + "%";
         };
 
-        // Клик по полосе прогресса для перемотки
         function seekAudio(event) {
             var bcr = event.currentTarget.getBoundingClientRect();
             var x = event.clientX - bcr.left;
@@ -162,7 +194,6 @@
             audio.currentTime = (x / width) * audio.duration;
         }
 
-        // Фича: Поделиться сайтом
         function sharePage() {
             navigator.clipboard.writeText(window.location.href);
             var toast = document.getElementById("toast");
@@ -333,7 +364,6 @@
             margin-bottom: 30px;
         }
 
-        /* Оформление плеера */
         .player-container {
             background: #f8fafc;
             border: 1px solid var(--border);
@@ -382,7 +412,7 @@
         }
 
         .progress {
-            width: 0%; /* Начинаем с нуля */
+            width: 0%;
             height: 100%;
             background: var(--accent);
             border-radius: 3px;
@@ -444,7 +474,6 @@
             text-align: left;
         }
 
-        /* Стили для всплывающего тоста */
         .toast-alert {
             position: fixed;
             bottom: -50px;
